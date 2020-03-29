@@ -1,3 +1,4 @@
-export interface Environment {
-  apiKey: string
+export interface IEnvironment {
+  production: boolean;
+  apiKey: string;
 }
