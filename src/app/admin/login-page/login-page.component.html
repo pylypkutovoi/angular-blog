@@ -11,6 +11,13 @@
   {{error}}
   </div>
 
+  <div
+  *ngIf="message"
+  class="alert alert-dark"
+  >
+  {{message}}
+  </div>
+
 
   <div
     [ngClass]="{invalid: form.get('email').touched && form.get('email').invalid}"
