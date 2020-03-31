@@ -5,6 +5,7 @@ import { Post, FbCreateResponse} from './interfaces';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +19,17 @@ export class PostsService {
           id: response.name,
           date: new Date(post.date)
         }
+      }))
+  }
+
+  getAll(): Observable<Post[]> {
+    return this.http.get(`${environment.DbUrl}/posts.json`)
+      .pipe(map((response: {[key: string]: any}) => {
+        return Object.keys(response).map(key => ({
+          ...response[key],
+          id: key,
+          date: new Date(response[key].date)
+        }))
       }))
   }
 }
