@@ -11,6 +11,8 @@ import { EditPageComponent } from './edit-page/edit-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthGuard } from './shared/services/auth.guard';
 import { SearchPipe } from './shared/pipes/search.pipe';
+import { AlertComponent } from './shared/components/alert/alert.component';
+import { AlerService } from './shared/services/alert.service';
 
 const routes: Routes = [
   {
@@ -31,7 +33,8 @@ const routes: Routes = [
     DashboardPageComponent,
     CreatePageComponent,
     EditPageComponent,
-    SearchPipe
+    SearchPipe,
+    AlertComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +44,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard, AlerService]
 })
 export class AdminModule {
 
