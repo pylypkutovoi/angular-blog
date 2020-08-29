@@ -23,13 +23,17 @@ export class PostsService {
   }
 
   getAll(): Observable<Post[]> {
-    return this.http.get(`${environment.DbUrl}/posts.json`)
+    return this.http.get<Post[]>(`${environment.DbUrl}/posts.json`)
       .pipe(map((response: {[key: string]: any}) => {
+        if(response === null) {
+          return [];
+        }
         return Object.keys(response).map(key => ({
           ...response[key],
           id: key,
           date: new Date(response[key].date)
         }))
+
       }))
   }
 

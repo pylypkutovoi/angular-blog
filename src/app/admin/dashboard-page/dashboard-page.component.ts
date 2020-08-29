@@ -11,6 +11,7 @@ import { AlerService } from '../shared/services/alert.service';
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
+  loading = false;
   postsSub: Subscription;
   deleteSub: Subscription;
   searchString = '';
@@ -29,8 +30,10 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.postsSub = this.postsService.getAll().subscribe(posts => {
       this.posts = posts;
+      this.loading = false;
     })
   }
   ngOnDestroy(){
@@ -42,7 +45,4 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
       this.deleteSub.unsubscribe();
     }
   }
-
-
-
 }

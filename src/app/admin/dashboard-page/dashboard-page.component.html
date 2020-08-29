@@ -1,8 +1,8 @@
-<div *ngIf="posts.length; else loading">
+<div *ngIf="!loading; else loader">
   <div class="form-control">
     <input type="text" placeholder="Find a post..." [(ngModel)]="searchString">
   </div>
-  <table>
+  <table *ngIf="posts.length; else empty">
     <thead>
       <tr>
         <th>#</th>
@@ -30,8 +30,14 @@
       </tr>
     </tbody>
   </table>
+  <ng-template #empty>
+    <div class="text-center">
+      <p class="mb15">You do not have any posts yet</p>
+      <a class="btn btn-dark"[routerLink]="['/admin', 'create']"> Create post</a>
+    </div>
+  </ng-template>
 </div>
 
-<ng-template #loading>
+<ng-template #loader>
   <p class="text-center">Loading...</p>
 </ng-template>
